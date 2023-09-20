@@ -1,10 +1,10 @@
-// Import Modules
 const { Model, DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
-class Comment extends Model { }
+// TODO:  Check password
 
-Project.init(
+User.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -12,38 +12,34 @@ Project.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        comment: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        date_created: {
-            type: DataTypes.DATE,
+        email: {
+            type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: DataTypes.NOW,
-        },
-        user_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'post',
-                key: 'id',
+            unique: true,
+            validate: {
+                isEmail: true,
             },
         },
-        user_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'user',
-                key: 'id',
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [8],
             },
         },
     },
     {
+        // TODO: hooks:
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'comment',
+        modelName: 'user',
     }
 );
 
-module.exports = Comment;
-
+module.exports = User;
