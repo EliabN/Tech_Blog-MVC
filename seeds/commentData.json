@@ -1,0 +1,17 @@
+[
+  {
+    "comment": "What an amazing mobile app",
+    "post_id": 1,
+    "user_id": 1
+  },
+  {
+    "comment": "10 new questions each day!?",
+    "post_id": 2,
+    "user_id": 1
+  },
+  {
+    "comment": "I need this app",
+    "post_id": 2,
+    "user_id": 1
+  }
+]
