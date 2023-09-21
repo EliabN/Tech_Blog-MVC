@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Post, Comment, User } = require('../models');
-//const withAuth = require('../utils/auth');
+const withAuth = require('../utils/auth');
 
 
 // TODO:
@@ -20,35 +20,82 @@ router.get('/', async (req, res) => {
             ],
         });
 
-        // // Testing for insomnia
-        res.json(productData);
+        // Testing for insomnia
+        res.json(postsData);
 
         // Serialize data so the template can read it
-        const posts = postsData.map((posts) => posts.get({ plain: true }));
+        // const posts = postsData.map((posts) => posts.get({ plain: true }));
 
-        // Pass serialized data and session flag into template
-        res.render('homepage', {
-            posts,
-            //logged_in: req.session.logged_in 
-        });
+        // // Pass serialized data and session flag into template
+        // res.render('homepage', {
+        //     posts,
+        //     //logged_in: req.session.logged_in 
+        // });
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
 
+// GET single post by id
+router.get('/post/:id', async (req, res) => {
+    try {
+        const postData = await Post.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['name'],
+                },
+            ],
+        });
 
-// WHEN I click on the homepage option
-// THEN I am taken to the homepage
+        // Testing for insomnia
+        res.json(postData);
 
-// WHEN I click on any other links in the navigation
-// THEN I am prompted to either sign up or sign in
+        // // Serialize data so the template can read it 
+        // const post = postData.get({ plain: true });
 
-// WHEN I am signed in to the site
-// THEN I see navigation links for the homepage, the dashboard, and the option to log out
 
-// WHEN I click on the homepage option in the navigation
-// THEN I am taken to the homepage and presented with existing blog posts that include the post title and the date created
+        // // Pass serialized data and session flag into template
+        // res.render('post', {
+        //     ...post,
+        //     logged_in: req.session.logged_in
+        // });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
-// WHEN I click on the dashboard option in the navigation
-// THEN I am taken to the dashboard and presented with any blog posts I have already created and the option to add a new blog post
+// Use withAuth middleware to prevent access to route
+router.get('/dashboard', withAuth, async (req, res) => {
+    try {
+        // Find the logged in user based on the session ID
+        const userData = await User.findByPk(req.session.user_id, {
+            attributes: { exclude: ['password'] },
+            include: [{ model: Project }],
+        });
+
+        const user = userData.get({ plain: true });
+
+        res.render('dashboard', {
+            ...user,
+            logged_in: true
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+router.get('/login', (req, res) => {
+    // If the user is already logged in, redirect the request to another route
+    if (req.session.logged_in) {
+        res.redirect('/homepage');
+        return;
+    }
+
+    res.render('login');
+});
+
+module.exports = router;
+
+module.exports = router;
