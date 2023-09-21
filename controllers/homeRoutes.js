@@ -21,16 +21,16 @@ router.get('/', async (req, res) => {
         });
 
         // Testing for insomnia
-        res.json(postsData);
+        //res.json(postsData);
 
         // Serialize data so the template can read it
-        // const posts = postsData.map((posts) => posts.get({ plain: true }));
+        const posts = postsData.map((posts) => posts.get({ plain: true }));
 
-        // // Pass serialized data and session flag into template
-        // res.render('homepage', {
-        //     posts,
-        //     //logged_in: req.session.logged_in 
-        // });
+        // Pass serialized data and session flag into template
+        res.render('homepage', {
+            posts,
+            //logged_in: req.session.logged_in 
+        });
     } catch (err) {
         res.status(500).json(err);
     }
@@ -50,17 +50,17 @@ router.get('/post/:id', async (req, res) => {
         });
 
         // Testing for insomnia
-        res.json(postData);
+        //res.json(postData);
 
-        // // Serialize data so the template can read it 
-        // const post = postData.get({ plain: true });
+        // Serialize data so the template can read it 
+        const post = postData.get({ plain: true });
 
 
-        // // Pass serialized data and session flag into template
-        // res.render('post', {
-        //     ...post,
-        //     logged_in: req.session.logged_in
-        // });
+        // Pass serialized data and session flag into template
+        res.render('post', {
+            ...post,
+            //logged_in: req.session.logged_in
+        });
     } catch (err) {
         res.status(500).json(err);
     }
