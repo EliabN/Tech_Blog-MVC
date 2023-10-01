@@ -17,6 +17,14 @@ router.get('/', async (req, res) => {
                     model: User,
                     attributes: ['name'],
                 },
+                {
+                    model: Comment,
+                    attributes: ['comment', 'date_created'],
+                    include: [{
+                        model: User,
+                        attributes: ['name'],
+                    }]
+                },
             ],
         });
 
@@ -45,6 +53,14 @@ router.get('/post/:id', async (req, res) => {
                 {
                     model: User,
                     attributes: ['name'],
+                },
+                {
+                    model: Comment,
+                    attributes: ['comment', 'date_created'],
+                    include: [{
+                        model: User,
+                        attributes: ['name'],
+                    }]
                 },
             ],
         });
@@ -95,7 +111,5 @@ router.get('/login', (req, res) => {
 
     res.render('login');
 });
-
-module.exports = router;
 
 module.exports = router;
