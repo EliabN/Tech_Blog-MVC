@@ -1,6 +1,18 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+
+router.get('/', (req, res) => {
+  User.findAll({
+    attributes: { exclude: ['password'] },
+  })
+    .then((dbUserData) => res.json(dbUserData))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
@@ -20,6 +32,8 @@ router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { name: req.body.name } });
 
+    console.log(userData, req.body.name)
+
     if (!userData) {
       res
         .status(400)
@@ -28,18 +42,19 @@ router.post('/login', async (req, res) => {
     }
 
     const validPassword = await userData.checkPassword(req.body.password);
+    console.log(userData, req.body.password)
 
     if (!validPassword) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+        .json({ message: 'Incorrect password, please try again' });
       return;
     }
 
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-      
+
       res.json({ user: userData, message: 'You are now logged in!' });
     });
 
