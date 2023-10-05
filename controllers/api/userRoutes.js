@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User } = require('../../models');
 
 
-router.get('/', (req, res) => {
+router.get('/all', (req, res) => {
   User.findAll({
     attributes: { exclude: ['password'] },
   })
@@ -32,7 +32,10 @@ router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { name: req.body.name } });
 
-    console.log(userData, req.body.name)
+    console.log("Received password:", req.body.password);
+    console.log("Database password:", userData ? userData.password : "User not found");
+
+    //console.log(userData, req.body.name)
 
     if (!userData) {
       res
@@ -42,7 +45,7 @@ router.post('/login', async (req, res) => {
     }
 
     const validPassword = await userData.checkPassword(req.body.password);
-    console.log(userData, req.body.password)
+    //console.log(userData, req.body.password)
 
     if (!validPassword) {
       res
