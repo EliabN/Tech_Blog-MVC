@@ -4,76 +4,75 @@ const router = require('express').Router();
 const { Post, Comment, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-
-// GET all comment
+// GET all post
 router.get('/', async (req, res) => {
     try {
-        const newComment = await Comment.findAll({
+        const newPost = await Post.findAll({
             // ...req.body,
             // user_id: req.session.user_id,
 
-            include: [{ model: User }]
+            include: [{ model: Comment }]
         });
 
-        res.status(200).json(newComment);
+        res.status(200).json(newPost);
     } catch (err) {
         res.status(400).json(err);
     }
 });
 
 
-// POST create new comment
+// POST create new post
 router.post('/', withAuth, async (req, res) => {
     try {
-        const newComment = await Comment.create({
+        const newPost = await Post.create({
             ...req.body,
             user_id: req.session.user_id,
 
-            include: [{ model: User }]
+            include: [{ model: Comment }]
         });
 
-        res.status(200).json(newComment);
+        res.status(200).json(newPost);
     } catch (err) {
         res.status(400).json(err);
     }
 });
 
-// PUT update a comment
+// PUT update a post
 router.put('/:id', async (req, res) => {
-    // Update a comment by its `id` value
+    // Update a post by its `id` value
     try {
-        const newComment = await Comment.update(req.body, {
+        const postData = await Post.update(req.body, {
             where: {
                 id: req.params.id,
             },
         });
-        if (!commentData[0]) {
-            res.status(404).json({ message: 'No comment with this id!' });
+        if (!postData[0]) {
+            res.status(404).json({ message: 'No post with this id!' });
             return;
         }
-        res.status(200).json(newComment);
+        res.status(200).json(postData);
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
 
-// DELETE delete comment
+// DELETE delete post
 router.delete('/:id', withAuth, async (req, res) => {
     try {
-        const newComment = await Comment.destroy({
+        const postData = await Post.destroy({
             where: {
                 id: req.params.id,
                 user_id: req.session.user_id,
             },
         });
 
-        if (!commentData) {
-            res.status(404).json({ message: 'No comment found with this id!' });
+        if (!postData) {
+            res.status(404).json({ message: 'No post found with this id!' });
             return;
         }
 
-        res.status(200).json(newComment);
+        res.status(200).json(postData);
     } catch (err) {
         res.status(500).json(err);
     }
