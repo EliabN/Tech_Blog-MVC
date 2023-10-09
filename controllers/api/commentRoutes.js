@@ -15,8 +15,8 @@ const withAuth = require('../../utils/auth');
 router.get('/', async (req, res) => {
     try {
         const newComment = await Comment.findAll({
-            // ...req.body,
-            // user_id: req.session.user_id,
+            ...req.body,
+            user_id: req.session.user_id,
 
             include: [{ model: User }]
         });
