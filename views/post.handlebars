@@ -5,26 +5,33 @@
 
   <!-- Loop over each comment in the comments array for this post -->
   <div class="row mt-4">
-  <div class="comments-section">
-    <!-- Loop over each comment in the comments array for this post -->
-    {{#each comments as |comment| }}
-        <div class="comment col-md-7">
-            <p>{{comment.comment}}</p>
-            <p>Comment by {{comment.user.name}} on {{format_date comment.date_created}}</p>
+    <div class="comments-section">
+      <!-- Loop over each comment in the comments array for this post -->
+      {{#each comments as |comment| }}
+      <div class="comment col-md-7">
+        <p>{{comment.comment}}</p>
+        <p>Comment by {{comment.user.name}} on {{format_date comment.date_created}}</p>
+      </div>
+      {{/each}}
+    </div>
+    <div class="col-md-6">
+      <form class="form new-comment-form">
+        <div class="form-group">
+          <label for="comment">Leave a Comment:</label>
+          <input class="form-input" type="text" id="comment-content" content="comment-content" />
         </div>
-    {{/each}}
-</div>
-  <div class="col-md-6">
-    <form class="form new-comment-form">
-      <div class="form-group">
-        <label for="comment">Leave a Comment:</label>
-        <input class="form-input" type="text" id="comment-content" content="comment-content" />
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary add-comment" data-id="{{session.user_id}}" >Add Comment</button>
-      </div>
-    </form>
+        <div class="form-group">
+          {{#if logged_in}}
+          <button type="submit" class="btn btn-primary add-comment">Add Comment</button>
+          {{else}}
+          <a href="/login" class="btn btn-primary login-comment">Login</a>
+          {{/if}}
+        </div>
+      </form>
+    </div>
   </div>
-</div>
 
-<script src="/js/comment.js"></script>
+  <!-- Render script for logged in users only -->
+  {{#if logged_in}}
+  <script src="/js/comment.js"></script>
+  {{/if}}

@@ -7,7 +7,7 @@ const newFormHandler = async (event) => {
     const comment = document.querySelector('#comment-content').value.trim();
     const post_id = document.querySelector('.the-post').getAttribute('data-id');
     //const user_id = document.querySelector('.add-comment').getAttribute('data-id');
-    
+
     if (comment) {
         const newComment = await fetch(`/api/comments/`, {
             method: 'POST',
@@ -20,6 +20,7 @@ const newFormHandler = async (event) => {
 
 
         if (newComment.ok) {
+            alert('Comment saved!')
             document.location.replace(`/post/${post_id}`);
         } else {
             alert('Failed to create post');

@@ -1,0 +1,49 @@
+<div class="col-md-6 create-post">
+  <h2>Current Post Details:</h2>
+
+  <section class="post-card">
+    <div class="post-card-header">
+      <p>
+        Title:
+        {{title}}
+      </p>
+    </div>
+    <div class="card-body">
+      <p>
+        Description:
+        {{content}}
+      </p>
+    </div>
+  </section>
+  <br />
+  <br />
+
+  <section class="edit-post-container">
+    <h4>Update Post</h4>
+    <form class="edit-post-form">
+      <label for="title">
+        Post Title:
+      </label>
+      <br />
+      <textarea id="title" name="title" rows="1" cols="40">
+          {{title}}
+        </textarea>
+      <br />
+      <label for="description">
+        Description:
+      </label>
+      <br />
+      <textarea id="description" name="description" rows="2" cols="40">
+          {{content}}
+        </textarea>
+      <br />
+      <br />
+      <button class="btn btn-primary update" value="Submit">Update</button>
+      <button class="btn btn-danger delete" data-id="{{id}}">Delete</button>
+    </form>
+  </section>
+</div>
+
+{{#if logged_in}}
+<script src="/js/editPost.js"></script>
+{{/if}}

@@ -105,6 +105,43 @@ router.get('/dashboard', withAuth, async (req, res) => {
     }
 });
 
+// GET edit single post by id
+router.get('/edit-post/:id', async (req, res) => {
+    try {
+        const postData = await Post.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['name'],
+                },
+                {
+                    model: Comment,
+                    attributes: ['comment', 'date_created'],
+                    include: [{
+                        model: User,
+                        attributes: ['name'],
+                    }]
+                },
+            ],
+        });
+
+        // Testing for insomnia
+        //res.json(postData);
+
+        // Serialize data so the template can read it 
+        const post = postData.get({ plain: true });
+
+
+        // Pass serialized data and session flag into template
+        res.render('edit-post', {
+            ...post,
+            logged_in: req.session.logged_in
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 // GET Login page
 router.get('/login', (req, res) => {
     // If the user is already logged in, redirect the request to another route

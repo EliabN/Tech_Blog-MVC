@@ -33,5 +33,6 @@ document
     .addEventListener('submit', signupFormHandler);
 
 document.querySelector('#back-button').addEventListener('click', () => {
-    window.location.href = '/login'; // Redirect to the sign-up page
+    // Redirect to the sign-up page
+    window.location.href = '/login';
 });

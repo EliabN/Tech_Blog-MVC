@@ -27,12 +27,9 @@ const loginFormHandler = async (event) => {
             headers: { 'Content-Type': 'application/json' },
         });
 
-        console.log("name:", name);
-        console.log("password:", password);
-        console.log("response:", response);
-
         if (response.ok) {
             // If successful, redirect the browser to the profile page
+            alert(`${name}, you are now logged in!`)
             document.location.replace('/');
         } else {
             alert(response.statusText);
@@ -45,5 +42,6 @@ document
     .addEventListener('submit', loginFormHandler);
 
 document.querySelector('#signup-button').addEventListener('click', () => {
-    window.location.href = '/signup'; // Redirect to the sign-up page
+    // Redirect to the sign-up page
+    window.location.href = '/signup';
 });
