@@ -6,16 +6,15 @@ async function editFormHandler(event) {
     console.log('test1')
     const title = document.querySelector('#title').value;
     const content = document.querySelector('#description').value;
-
     // window.location gives us access to the URL. We then use the .split() method to access the number at the end of the URL and set that equal to id.
     const id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];
-
-    // What part of our application will handle this 'put' request?
-    // The Controller will handle this 'put' request.
-
-    const response = await fetch(`/api/post/${id}`, {
+    
+    
+    
+    // Use 'put' request from Controller to update post
+    const response = await fetch(`/api/posts/${id}`, {
         method: 'PUT',
         body: JSON.stringify({
             title,
@@ -26,17 +25,15 @@ async function editFormHandler(event) {
         },
     });
 
-    // What happens if the response is ok?
     // If the response is ok, that means that the post was updated successfully. 
     if (response.ok) {
-        document.location.replace(`/post/${id}`);
+        document.location.replace(`/edit-post/${id}`);
     } else {
         alert('Failed to edit post');
     }
 }
 
 const delButtonHandler = async (event) => {
-    console.log('test2')
     if (event.target.hasAttribute('data-id')) {
         const id = event.target.getAttribute('data-id');
 
@@ -55,7 +52,7 @@ const delButtonHandler = async (event) => {
 
 document
     .querySelector('.update')
-    .addEventListener('submit', editFormHandler);
+    .addEventListener('click', editFormHandler);
 
 document
     .querySelector('.delete')
