@@ -1,28 +1,32 @@
 <!--TODO: WHEN I visit the site for the first time
 THEN I am presented with the homepage, which includes existing blog posts if any have been posted; navigation links for the homepage and the dashboard; and the option to log in-->
 
-<!-- Loop over each object in the projects array -->
+<!-- Loop over each post in the projects array -->
 {{#each posts as |post| }}
-<div class="row mb-4 project">
-  <div class="col-md-5">
-    <h2>
-      <!-- Call helper function with triple brackets to render the emoji span as HTML -->
-      <a href="/post/{{post.id}}">{{post.title}}</a>
+<div class="col mb-4 lg-9 post">
+  <div class="card p-3 pt-1 pb-0 d-flex row-md-7">
+    <h2 class="d-flex align-items-center">
+      <p class="mb-0 me-2">Topic:</p> <!-- Use "me" to control right margin -->
+      <a href="/post/{{post.id}}" class="mb-0">{{ post.title}}</a> <!-- Use "ms" to control left margin -->
     </h2>
   </div>
-  <div class="col-md-7">
-    <h3>
-      {{post.content}}
-    </h3>
-    <p>Posted by {{post.user.name}} on {{format_date post.date_created}}</p>
-    <div class="col-md-7">
-    <!-- Loop over each comment in the comments array for this post -->
-    {{#each post.comments as |comment| }}
-        <div class="comment col-md-7">
-          <p>{{comment.comment}}</p>
-          <p>Comment by {{comment.user.name}} on {{format_date comment.date_created}}</p>
-        </div>
+  <div class="row-md-7 card bg-dark p-3">
+    <div class="card p-3 pt-1 pb-0 mb-3 bg-primary text-light">
+      <h3 class="pt-0">
+        {{post.content}}
+      </h3>
+      <p>Posted by: {{post.user.name}} on {{format_date post.date_created}}</p>
+    </div>
+
+    <div class="row-md-7 p-3 pt-1 pb-0">
+      <!-- Loop over each comment in the comments array for this post -->
+      {{#each post.comments as |comment| }}
+      <div class="card bg-secondary p-3 pt-1 pb-0 mb-2 comment row-md-7 text-light">
+        <h4>{{comment.comment}}</h4>
+        <p>Comment by: {{comment.user.name}} on {{format_date comment.date_created}}</p>
+      </div>
       {{/each}}
+    </div>
   </div>
 </div>
 {{/each}}

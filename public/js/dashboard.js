@@ -34,12 +34,17 @@ const addNewPostButton = document.querySelector('#add-new-post');
 // Select the new post form
 const newPostForm = document.querySelector('.create-post');
 
+// All current port div
+const currentPosts = document.querySelector('.post-list')
+
 // Add a click event listener to the button
 addNewPostButton.addEventListener('click', () => {
     // Display New Post the form
     if (newPostForm.style.display === 'none' || newPostForm.style.display === '') {
         newPostForm.style.display = 'block';
+        // Remove "Add New Post" Button and all current posts from page
         addNewPostButton.style.display = 'none';
+        currentPosts.style.display = 'none';
     } else {
         newPostForm.style.display = 'none';
     }
