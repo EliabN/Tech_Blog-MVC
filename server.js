@@ -15,10 +15,21 @@ const PORT = process.env.PORT || 3001;
 // Set up Handlebars.js engine with custom helpers
 const hbs = exphbs.create({ helpers });
 
+// Inform Express.js on which template engine to use
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+app.use(function (req, res, next) {
+    res.header(
+        'Content-Security-Policy',
+        "script-src 'self' https://cdn.jsdelivr.net"
+    );
+    return next();
+});
+
 const sess = {
     secret: 'Super secret secret',
     cookie: {
-        maxAge: 9900000,
+        maxAge: 300000,
         httpOnly: true,
         secure: false,
         sameSite: 'strict',
@@ -32,9 +43,7 @@ const sess = {
 
 app.use(session(sess));
 
-// Inform Express.js on which template engine to use
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
