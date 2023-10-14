@@ -10,9 +10,9 @@ async function editFormHandler(event) {
     const id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];
-    
-    
-    
+
+
+
     // Use 'put' request from Controller to update post
     const response = await fetch(`/api/posts/${id}`, {
         method: 'PUT',
@@ -29,7 +29,7 @@ async function editFormHandler(event) {
     if (response.ok) {
         document.location.replace(`/edit-post/${id}`);
     } else {
-        alert('Failed to edit post');
+        alert('Failed to edit post, no changes made');
     }
 }
 

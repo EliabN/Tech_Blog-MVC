@@ -1,13 +1,13 @@
 <!--TODO: WHEN I visit the site for the first time
 THEN I am presented with the homepage, which includes existing blog posts if any have been posted; navigation links for the homepage and the dashboard; and the option to log in-->
-<section class="col container container-fluid mt-0">
+<section class="col container container-fluid mt-4">
   <!-- Loop over each post in the projects array -->
   {{#each posts as |post| }}
   <div class="col mb-4 lg-9 post">
     <div class="card p-3 pt-1 pb-0 d-flex row-md-7">
       <h2 class="d-flex align-items-center">
-        <p class="mb-0 me-2">Topic:</p> <!-- Use "me" to control right margin -->
-        <a href="/post/{{post.id}}" class="mb-0">{{ post.title}}</a> <!-- Use "ms" to control left margin -->
+        <p class="mb-0 me-2">Topic:</p>
+        <a href="/post/{{post.id}}" class="mb-0">{{ post.title}}</a>
       </h2>
     </div>
     <div class="row-md-7 card bg-dark p-3">
@@ -19,9 +19,8 @@ THEN I am presented with the homepage, which includes existing blog posts if any
       </div>
 
       <div class="row-md-7 p-3 pt-1 pb-0">
-        <!-- Loop over each comment in the comments array for this post -->
         {{#each post.comments as |comment| }}
-        <div class="card bg-secondary p-3 pt-1 pb-0 mb-2 comment row-md-7 text-light">
+        <div class="card bg-dark p-3 pt-1 pb-0 mb-2 comment row-md-7 text-light">
           <h4>{{comment.comment}}</h4>
           <p>Comment by: {{comment.user.name}} on {{format_date comment.date_created}}</p>
         </div>
@@ -30,3 +29,4 @@ THEN I am presented with the homepage, which includes existing blog posts if any
     </div>
   </div>
   {{/each}}
+</section>

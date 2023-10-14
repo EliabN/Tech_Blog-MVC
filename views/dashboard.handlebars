@@ -22,23 +22,15 @@
         </div>
         {{/each}}
       </section>
-
       <br>
-
       <div class="d-flex justify-content-center">
         <button id="add-new-post" class="btn btn-primary p-3" style="width: 80%;">
           <h3 class="text-light">Add New Post</h3>
         </button>
       </div>
   </section>
-
-
   <br>
-  </div=>
   {{/if}}
-
-  <br>
-  <br>
 
 
   <div class="row create-post" style="display: none; width: 80%;">
@@ -47,12 +39,17 @@
     <form class="form new-post-form">
       <section class="card bg-dark p-3 text-light justify-content-center">
         <div class="form-group">
-          <label for="post-title">Post Title:</label>
-          <input class="form-input" type="text" id="post-title" title="post-title">
+          <label for="post-title">
+            <h5 style="color: aquamarine;">Post Title:</h5>
+          </label>
+          <input class="form-input" type="text" id="post-title" title="post-title" style="width: 100%;">
         </div>
         <div class="form-group">
-          <label for="post-desc">Description:</label>
-          <input class="form-input" id="post-desc" title="post-desc" row="5" style="width: 85%;"></input>
+          <label for="post-desc">
+            <h5 style="color: aquamarine;">Description:</h5>
+          </label>
+          <input class="form-input" id="post-desc" title="post-desc" cols="40"
+                 style="width: 100%; height: 100px"></input>
         </div>
       </section>
       <br>

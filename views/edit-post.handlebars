@@ -1,18 +1,22 @@
-<div class="col-md-6 create-post">
+<div class="row card p-3 pt-1 pb-0 d-flex justify-content-center" style="width: 80%;">
   <h2>Current Post Details:</h2>
 
-  <section class="post-card">
-    <div class="post-card-header">
-      <p>
+  <section class="card bg-dark p-3 text-light">
+    <div class="d-flex justify-content-center">
+      <h4 class="me-2">
         Title:
+      </h4>
+      <h4 style="color: aquamarine;" style="width: 100%;">
         {{title}}
-      </p>
+      </h4>
     </div>
-    <div class="card-body">
-      <p>
+    <div class="d-flex justify-content-center">
+      <h4 class="me-2">
         Description:
+      </h4>
+      <h4 style="color: aquamarine;" style="width: 100%;">
         {{content}}
-      </p>
+      </h4>
     </div>
   </section>
   <br />
@@ -20,25 +24,32 @@
 
   <section class="edit-post-container">
     <h4>Update Post</h4>
-    <form class="edit-post-form">
-      <label for="title">
-        Post Title:
-      </label>
-      <br />
-      <textarea id="title" name="title" rows="1" cols="40">{{title}}</textarea>
-      <br />
-      <label for="description">
-        Description:
-      </label>
-      <br />
-      <textarea id="description" name="description" rows="2" cols="40">{{content}}</textarea>
-      <br />
-      <br />
-      <button class="btn btn-primary update" value="Submit">Update</button>
-      <button class="btn btn-danger delete" data-id="{{id}}">Delete</button>
-    </form>
+    <section class="card bg-dark p-3 text-light justify-content-center">
+      <form class="row edit-post-form justify-content-center">
+        <section>
+          <label for="row title">
+            <h5 style="color: aquamarine;">Post Title:</h5>
+          </label>
+          <textarea id="title" name="title" rows="1" style="width: 100%;">{{title}}</textarea>
+          <br />
+          <label for="description">
+            <h5 style="color: aquamarine;">Description:</h5>
+          </label>
+          <textarea id="description" name="description" rows="2" style="width: 100%;">{{content}}</textarea>
+        </section>
+        <section class="form-group d-flex justify-content-center mt-4">
+          <button class="btn btn-primary update me-4" value="Submit">Update</button>
+          <button class="btn btn-danger delete" data-id="{{id}}">Delete</button>
+        </section>
+
+      </form>
+    </section>
+    <br>
   </section>
+
 </div>
+
+
 
 {{#if logged_in}}
 <script src="/js/editPost.js"></script>
