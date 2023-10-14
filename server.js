@@ -18,13 +18,6 @@ const hbs = exphbs.create({ helpers });
 // Inform Express.js on which template engine to use
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-app.use(function (req, res, next) {
-    res.header(
-        'Content-Security-Policy',
-        "script-src 'self' https://cdn.jsdelivr.net"
-    );
-    return next();
-});
 
 const sess = {
     secret: 'Super secret secret',
