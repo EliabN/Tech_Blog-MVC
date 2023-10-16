@@ -32,7 +32,7 @@ const loginFormHandler = async (event) => {
             alert(`${name}, you are now logged in!`)
             document.location.replace('/');
         } else {
-            alert(response.statusText);
+            alert('Incorrect detail, please try again!');
         }
     }
 };
