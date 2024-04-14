@@ -31,7 +31,7 @@ The following animation demonstrates the application functionality:
 
 ## Important
 
-The application’s folder structure must follow the Model-View-Controller paradigm. The [express-handlebars](https://www.npmjs.com/package/express-handlebars) package to implement Handlebars.js was used for Views, [MySQL2](https://www.npmjs.com/package/mysql2) and [Sequelize](https://www.npmjs.com/package/sequelize) packages to connect to a MySQL database for Models, and create an Express.js API for Controllers.
+The application’s folder structure follows the Model-View-Controller paradigm. The [express-handlebars](https://www.npmjs.com/package/express-handlebars) package to implement Handlebars.js was used for Views, [MySQL2](https://www.npmjs.com/package/mysql2) and [Sequelize](https://www.npmjs.com/package/sequelize) packages to connect to a MySQL database for Models, and create an Express.js API for Controllers.
 
 Also use thy [dotenv package](https://www.npmjs.com/package/dotenv) to use environment variables, the [bcrypt package](https://www.npmjs.com/package/bcrypt) to hash passwords, and the [express-session](https://www.npmjs.com/package/express-session) and [connect-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize) packages to add authentication.
 
